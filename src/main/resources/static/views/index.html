@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="ISO-8859-1">
+      <title>Login Page</title>
+   </head>
+   <script src="js/lib/angular.min.js"></script>
+   <script src="js/lib/ui-bootstrap-tpls-2.5.0.min.js"></script>
+   <script src="js/app/app.js"></script>
+   <script src="js/app/UserController.js"></script>
+   <script src="js/app/UserService.js"></script>
+   <link rel="stylesheet" href="css/lib/bootstrap.min.css" />
+   <link rel="stylesheet" href="css/app/app.css" />
+   <body>
+      <h1>Vehicle Asset Financing</h1>
+      <hr />
+      <form ng-app="demo" ng-controller="UserController" name="login"
+         novalidate autocomplete="off">
+         <div id="login" class="container">
+            <div class="row">
+               <label>UserName</label> <input type="text" name="userName"
+                  ng-model="userDto.userName" class="input-sm spacing" placeholder="Username" required />
+                  <span *ngIf = "userName?.required">*</span>
+                   <span
+                  style="color: red"
+                  ng-show="login.userName.$dirty && login.userName.$invalid"> <span
+                  ng-show="login.userName.$error.required">Username is required.</span>
+               </span>
+            </div>
+            <br />
+            <div class="row">
+               <label>Password </label> <input type="password" name="password"
+                  ng-model="userDto.password" class="input-sm spacing" placeholder="Password" required /> 
+                  <span *ngIf = "password?.required">*</span>
+                  <span
+                  style="color: red"
+                  ng-show="login.password.$dirty && login.password.$invalid">
+               <span ng-show="login.password.$error.required">Password is
+               required.</span>
+               </span>
+            </div>
+            <br />
+            <div class="row">
+               <button ng-click="authenticate()" class="btn btn-sm btn-info"
+                  ng-disabled="login.userName.$dirty && login.userName.$invalid ||  
+                  login.password.$dirty && login.password.$invalid || login.$invalid">Login</button>
+            </div>
+            <hr />
+            
+                <div class="row" style="color:red">
+        			
+            				<span ng-show ="userDto.isLoginFailed">User Login Attempt failed..</span>
+            				
+        			
+    		</div>
+            
+            
+         </div>
+      </form>
+   </body>
+</html>

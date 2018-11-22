@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Landing Page</title>
+</head>
+<body>
+
+	<form ng-controller="VehicleAssetController" ng-app="demo"
+		name="vehicleFinance" novalidate autocomplete="off">
+		<div class="container">
+			<h1>Vehicle Asset Financing- Calculator</h1>
+			<div class="row">
+				<label> <input type="radio" value="1"
+					ng-model="finance.option" ng-click="resetFields()" /> Option A
+				</label> <label> <input type="radio" value="2"
+					ng-model="finance.option" ng-click="resetFields()" /> Option B
+				</label> <label> <input type="radio" value="3"
+					ng-model="finance.option" ng-click="resetFields()" /> Option C
+				</label>
+
+				<!-- <button ng-click="authenticate()" class="btn btn-sm btn-info">Login</button> -->
+			</div>
+			<hr />
+			<div class="row">
+				<div id="optionA" ng-if="finance.option==1 || finance.option==3">
+					<label>No Of Months</label> <input type="number" name="months"
+						class="input-sm spacing" min="6" max="48"
+						ng-model="financeDto.months" required /><span>duration(6-48
+						months)</span>
+				</div>
+				<div style="color: red">
+					<span
+						ng-show="vehicleFinance.months.$error.number || vehicleFinance.months.$invalid">Invalid
+						!</span>
+				</div>
+
+				<br />
+				<div id="optionB" ng-if="finance.option==1 || finance.option==2">
+					<label>Amount Financed</label> <input type="number" name="amount"
+						class="input-sm spacing" min="10000" max="100000"
+						ng-model="financeDto.amount" required /><span>(10000-100000
+						Euros)</span>
+				</div>
+				<div style="color: red">
+					<span
+						ng-show="vehicleFinance.amount.$error.number || vehicleFinance.amount.$invalid">Invalid
+						!</span>
+				</div>
+				<br />
+				<div id="optionC" ng-if="finance.option==2 || finance.option==3">
+					<label>Monthly Payment</label> <input type="number" name="payment"
+						class="input-sm spacing" min="208" max="16666"
+						ng-model="financeDto.payment" required /><span>(in Euros)</span>
+					<div style="color: red">
+						<span
+							ng-show="vehicleFinance.payment.$error.number || vehicleFinance.payment.$invalid">Invalid
+							!</span>
+					</div>
+
+				</div>
+
+				<div class="row">
+					<button ng-click="getVehicleFinanceDetails()"
+						class="btn btn-sm btn-info">Calculate</button>
+				</div>
+
+				<hr />
+				<!-- Calculated Vehicle Asset Financing details will get displayed here -->
+				<div class="row">
+					<span ng-show="financeDto.isValidDetails"><b>Vehicle
+							Asset Calculation Output - No Of Months : {{financeDto.months}},
+							Amount Financed : {{financeDto.amount}}, Monthly Payment :
+							{{financeDto.payment}}</b></span>
+					<br>
+					<button ng-click="completeVehicleFinanceDeal()"
+						class="btn btn-sm btn-info" ng-show="financeDto.isValidDetails">Complete Deal</button>		
+				</div>
+
+				<hr />
+			</div>
+	</form>
+</body>
+<script src="js/lib/angular.min.js"></script>
+<script src="js/lib/ui-bootstrap-tpls-2.5.0.min.js"></script>
+<script src="js/app/app.js"></script>
+<script src="js/app/VehicleAssetController.js"></script>
+<script src="js/app/VehicleAssetService.js"></script>
+<link rel="stylesheet" href="css/lib/bootstrap.min.css" />
+<link rel="stylesheet" href="css/app/app.css" />
+</html>
